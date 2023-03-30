@@ -1,0 +1,25 @@
+@page "/jokegenerator"
+@using ChuckNorrisJokesApp.Data
+@inject JokeService JokeService
+
+<h1>Chuck Norris Jokes</h1>
+<p>Click the button below to generate a random Chuck Norris joke:</p>
+
+<button class="btn btn-primary" @onclick="GenerateJoke">Generate Joke</button>
+@if (!string.IsNullOrEmpty(joke))
+{
+    <div class="card mt-4">
+    <div class="card-body">
+        @joke
+    </div>
+</div>
+}
+
+@code {
+    private string joke;
+
+    private async Task GenerateJoke()
+    {
+        joke = await JokeService.GetRandomJokeAsync();
+    }
+}
